@@ -46,7 +46,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Homage to a Square</h1>
+      <h1>Homage to a Square Generator</h1>
       <div className="inputs">
         <input
           type="color"
