@@ -68,26 +68,26 @@ function App() {
           value={color4}
           onChange={(e) => setColor4(e.target.value)}
         />{" "}
+        <button
+          onClick={() => {
+            const colorsString =
+              `${color1},${color2},${color3},${color4}`.replaceAll("#", "");
+
+            if ("URLSearchParams" in window) {
+              var searchParams = new URLSearchParams(window.location.search);
+              searchParams.set("colors", colorsString);
+              var newRelativePathQuery =
+                window.location.href + "?" + searchParams.toString();
+
+              console.log("newRelativePathQuery", newRelativePathQuery);
+              navigator.clipboard.writeText(newRelativePathQuery);
+            }
+          }}
+        >
+          Copy URL
+        </button>
       </div>
 
-      <button
-        onClick={() => {
-          const colorsString =
-            `${color1},${color2},${color3},${color4}`.replaceAll("#", "");
-
-          if ("URLSearchParams" in window) {
-            var searchParams = new URLSearchParams(window.location.search);
-            searchParams.set("colors", colorsString);
-            var newRelativePathQuery =
-              window.location.href + "?" + searchParams.toString();
-
-            console.log("newRelativePathQuery", newRelativePathQuery);
-            navigator.clipboard.writeText(newRelativePathQuery);
-          }
-        }}
-      >
-        Copy URL
-      </button>
       <br />
 
       <div className="squares">

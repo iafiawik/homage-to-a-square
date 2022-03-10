@@ -1,1 +1,1 @@
-# homage-to-a-square
+# Homage to a Square generator
