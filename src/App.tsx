@@ -113,6 +113,18 @@ function App() {
                 setFavourites(newFavourites);
               }}
             />
+            <button
+              onClick={() => {
+                const colors = f.combinations[0];
+
+                setColor1(colors[0]);
+                setColor2(colors[1]);
+                setColor3(colors[2]);
+                setColor4(colors[3]);
+              }}
+            >
+              Load colours
+            </button>
             <br />
             <br />
             <div className="squares">
