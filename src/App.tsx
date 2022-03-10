@@ -19,26 +19,33 @@ function App() {
     []
   );
 
+  console.log("color1", color1);
+
   React.useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const colors = params.get("colors");
-
-    if (colors?.length === 4) {
-      console.log(colors);
-      window.setTimeout(() => {
-        setColor1("#" + colors[0]);
-        setColor2("#" + colors[1]);
-        setColor3("#" + colors[2]);
-        setColor4("#" + colors[3]);
-      }, 0);
-
-      const params2 = new URLSearchParams(window.location.search);
-      console.log("delete");
-      window.setTimeout(() => {
-        params2.delete("colors");
-      }, 0);
+    const colors = params.get("colors")?.replace(",", "#").split("#");
+    if (
+      colors?.length === 4 &&
+      colors[0] !== color1 &&
+      colors[1] !== color2 &&
+      colors[2] !== color3 &&
+      color4 !== colors[3]
+    ) {
+      setColor1(colors[0]);
+      setColor2(colors[1]);
+      setColor3(colors[2]);
+      setColor4(colors[3]);
     }
-  }, [setColor1, setColor2, setColor3, setColor4]);
+  }, [
+    color1,
+    color2,
+    color3,
+    color4,
+    setColor1,
+    setColor2,
+    setColor3,
+    setColor4,
+  ]);
 
   const permutators = perm([color1, color2, color3, color4]).filter(
     (p) => p.length === 4
@@ -76,11 +83,9 @@ function App() {
             if ("URLSearchParams" in window) {
               var searchParams = new URLSearchParams(window.location.search);
               searchParams.set("colors", colorsString);
-              var newRelativePathQuery =
-                window.location.href + "?" + searchParams.toString();
+              window.location.search = "?" + searchParams.toString();
 
-              console.log("newRelativePathQuery", newRelativePathQuery);
-              navigator.clipboard.writeText(newRelativePathQuery);
+              navigator.clipboard.writeText(window.location.href);
             }
           }}
         >
