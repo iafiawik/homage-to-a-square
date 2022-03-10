@@ -19,6 +19,27 @@ function App() {
     []
   );
 
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const colors = params.get("colors");
+
+    if (colors?.length === 4) {
+      console.log(colors);
+      window.setTimeout(() => {
+        setColor1("#" + colors[0]);
+        setColor2("#" + colors[1]);
+        setColor3("#" + colors[2]);
+        setColor4("#" + colors[3]);
+      }, 0);
+
+      const params2 = new URLSearchParams(window.location.search);
+      console.log("delete");
+      window.setTimeout(() => {
+        params2.delete("colors");
+      }, 0);
+    }
+  }, [setColor1, setColor2, setColor3, setColor4]);
+
   const permutators = perm([color1, color2, color3, color4]).filter(
     (p) => p.length === 4
   );
@@ -49,6 +70,24 @@ function App() {
         />{" "}
       </div>
 
+      <button
+        onClick={() => {
+          const colorsString =
+            `${color1},${color2},${color3},${color4}`.replaceAll("#", "");
+
+          if ("URLSearchParams" in window) {
+            var searchParams = new URLSearchParams(window.location.search);
+            searchParams.set("colors", colorsString);
+            var newRelativePathQuery =
+              window.location.href + "?" + searchParams.toString();
+
+            console.log("newRelativePathQuery", newRelativePathQuery);
+            navigator.clipboard.writeText(newRelativePathQuery);
+          }
+        }}
+      >
+        Copy URL
+      </button>
       <br />
 
       <div className="squares">
@@ -121,6 +160,14 @@ function App() {
                 setColor2(colors[1]);
                 setColor3(colors[2]);
                 setColor4(colors[3]);
+                const colorsString =
+                  `${color1},${color2},${color3},${color4}`.replaceAll("#", "");
+
+                var searchParams = new URLSearchParams(window.location.search);
+                searchParams.delete("colors");
+                searchParams.set("colors", colorsString);
+
+                window.location.search = "?" + searchParams.toString();
               }}
             >
               Load colours
