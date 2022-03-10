@@ -18,20 +18,6 @@ function App() {
     "favourites",
     []
   );
-  // const [favourites, setFavourites] = React.useState<[string[]]>([[]]);
-
-  // const sortedFavourites = favourites.sort((a: string[], b: string[]) => {
-  //   const aString = a.sort().join("");
-  //   const bString = b.sort().join("");
-
-  //   if (aString > bString) {
-  //     return -1;
-  //   }
-  //   if (bString > aString) {
-  //     return 1;
-  //   }
-  //   return 0;
-  // });
 
   const permutators = perm([color1, color2, color3, color4]).filter(
     (p) => p.length === 4
@@ -46,30 +32,21 @@ function App() {
           value={color1}
           onChange={(e) => setColor1(e.target.value)}
         />
-
         <input
           type="color"
           value={color2}
           onChange={(e) => setColor2(e.target.value)}
         />
-
         <input
           type="color"
           value={color3}
           onChange={(e) => setColor3(e.target.value)}
         />
-
         <input
           type="color"
           value={color4}
           onChange={(e) => setColor4(e.target.value)}
-        />
-
-        {/* <select>
-          {favourites.map((f) => (
-            <option value={f.join(",")}>{f.join(", ")}</option>
-          ))}
-        </select> */}
+        />{" "}
       </div>
 
       <br />
@@ -106,11 +83,6 @@ function App() {
                 }
 
                 setFavourites(newFavourites);
-                // if (!favourites.find((f) => f.join("") === colors.join(""))) {
-                //   var newFavourites = JSON.parse(JSON.stringify(favourites));
-                //   newFavourites.push(colors);
-                //   setFavourites(newFavourites);
-                // }
               }}
               colors={p}
               key={p.join("")}
